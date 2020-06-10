@@ -1,1 +1,5 @@
-{\rtf1}
+.preview {
+	width: 200px; 
+	max-height: 200px;
+	display: block;
+}
