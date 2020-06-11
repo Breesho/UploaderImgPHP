@@ -1,3 +1,26 @@
+<?php 
+
+var_dump($_FILES);
+
+if (isset($_FILES['file'])) {
+    $arrayType = array("jpg" => "image/jpg", "jpeg" => "image/jpeg", "gif" => "image/gif", "png" => "image/png");
+    $pathInfoImg = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
+    if (!array_key_exists($pathInfoImg, $arrayType)) {
+        $message = 'Le format du fichier n\'est pas conforme';
+    } else if (array_key_exists($pathInfoImg, $arrayType) > 1000000) {
+        $message = 'Votre fichier est trop lourd, la taille maximale est de 1Mo';
+    } else {
+        $message = 'Votre image a bien été uploadée';
+    }
+    if (!in_array($_FILES['file']['name'], $arrayType)) {
+        $message = 'Votre fichier est non-conforme';
+    }
+} else {
+    $message = 'Choissisez une image';
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -24,13 +47,13 @@
             <div>
                 <img class="preview">
             </div>
-            <form action="index.php" method="post" encode="multipart/form-data">
-                <input type="file" data-preview=".preview">
+            <form action="index.php" method="post" enctype="multipart/form-data">
+                <input type="file" name="file" id="file" data-preview=".preview">
                 <input type="submit" value="Upload">
             </form>
 
             <div>
-                
+                <p><?= $message ?></p>
             </div>
         </div>
         <div class="col-8 col-sm-12">
