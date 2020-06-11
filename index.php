@@ -1,3 +1,44 @@
+<?php
+$message = ' ';
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $noUpload = false;
+
+    if (isset($_FILES['file']) && $_FILES['file']['error'] == 0) {
+        $allowed = array('jpg' => 'image/jpg', 'jpeg' => 'image/jpeg', 'gif' => 'image/gif', 'png' => 'image/png');
+        $filename = $_FILES['file']['name'];
+        $filetype = $_FILES['file']['type'];
+        $filesize = $_FILES['file']['size'];
+
+
+        $ext = pathinfo($filename, PATHINFO_EXTENSION);
+        if (!array_key_exists($ext, $allowed)) {
+            $message = 'Le format du fichier n\'est pas conforme';
+        } else {
+            $maxsize = 1024 * 1024;
+            if ($filesize > $maxsize) {
+                $noUpload = true;
+                $message = 'Votre fichier est trop lourd, la taille maximale est de 1Mo';
+            } else if (in_array($filetype, $allowed) && !$noUpload) {
+                // Vérifie si le fichier existe avant de le télécharger.
+                if (file_exists('assets/img/' . $_FILES['file']['name'])) {
+                    $message = $_FILES['file']['name'] . ' existe déjà.';
+                } else {
+                    move_uploaded_file($_FILES['file']['tmp_name'], 'assets/img/' . uniqid() . $_FILES['file']['name']);
+                    $message = 'Votre fichier a été téléchargé avec succès.';
+                }
+            } else {
+                $message = 'Votre fichier n\'a pas été téléchargé';
+            }
+        }
+    } else {
+        $message = 'Error: ' . $_FILES['file']['error'];
+    }
+}
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -30,45 +71,7 @@
             </form>
 
             <div>
-                <?php
-
-
-                if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                    $noUpload = false;
-
-                    if (isset($_FILES['file']) && $_FILES['file']['error'] == 0) {
-                        $allowed = array('jpg' => 'image/jpg', 'jpeg' => 'image/jpeg', 'gif' => 'image/gif', 'png' => 'image/png');
-                        $filename = $_FILES['file']['name'];
-                        $filetype = $_FILES['file']['type'];
-                        $filesize = $_FILES['file']['size'];
-
-
-                        $ext = pathinfo($filename, PATHINFO_EXTENSION);
-                        if (!array_key_exists($ext, $allowed)) {
-                            echo 'Le format du fichier n\'est pas conforme';
-                        } else {
-                            $maxsize = 1024 * 1024;
-                            if ($filesize > $maxsize) {
-                                $noUpload = true;
-                                echo 'Votre fichier est trop lourd, la taille maximale est de 1Mo';
-                            } else if (in_array($filetype, $allowed) && !$noUpload) {
-                                // Vérifie si le fichier existe avant de le télécharger.
-                                if (file_exists('assets/img/' . $_FILES['file']['name'])) {
-                                    echo $_FILES['file']['name'] . ' existe déjà.';
-                                } else {
-                                    move_uploaded_file($_FILES['file']['tmp_name'], 'assets/img/' . uniqid() . $_FILES['file']['name']);
-                                    echo 'Votre fichier a été téléchargé avec succès.';
-                                }
-                            } else {
-                                echo 'Votre fichier n\'a pas été téléchargé';
-                            }
-                        }
-                    } else {
-                        echo 'Error: ' . $_FILES['file']['error'];
-                    }
-                }
-
-                ?>
+                <p><?= $message ?></p>
             </div>
         </div>
         <div class="col-8 col-sm-12">
