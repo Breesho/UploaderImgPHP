@@ -6,10 +6,13 @@ $message = ' ';
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $noUpload = false;
     $allowed = array('jpg' => 'image/jpg', 'jpeg' => 'image/jpeg', 'gif' => 'image/gif', 'png' => 'image/png');
+
+    // ---------- VERSION finfo
+
     $fileInfo = finfo_open(FILEINFO_MIME_TYPE);
     $detected_type = finfo_file($fileInfo, $_FILES['file']['tmp_name']);
     if (!in_array($detected_type, $allowed)) {
-        $message = 'Réessaye encore';
+        $message = 'Votre format de fichier n\'est pas conforme';
     } else {
         if (isset($_FILES['file']) && $_FILES['file']['error'] == 0) {
 
@@ -22,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $maxsize = 1024 * 1024;
             if ($filesize > $maxsize) {
                 $noUpload = true;
-                $message = 'Votre fichier est trop lourd, la taille maximale est de 1Mo';
+                $message = 'Votre fichier est trop lourd, la taille maximale autorisée est de 1Mo';
             } else if (in_array($filetype, $allowed) && !$noUpload) {
                 move_uploaded_file($_FILES['file']['tmp_name'], 'assets/img/' . uniqid() . '.' . $ext);
                 $message = 'Votre fichier a été téléchargé avec succès.';
@@ -33,6 +36,44 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $message = 'Error: ' . $_FILES['file']['error'];
         }
     }
+
+
+    // ---------- VERSION mime_content_type
+
+
+    // $filetmpname = $_FILES["file"]["tmp_name"];
+    // $filemime = mime_content_type ( $filetmpname );
+
+
+    // if (in_array($filemime, $allowed)) {
+
+    //     if (isset($_FILES["file"]) && $_FILES['file']['error'] == 0) {
+
+    //         $filename =  $_FILES["file"]["name"];
+    //         $filetype = $_FILES["file"]["type"];
+    //         $filesize = $_FILES["file"]["size"];
+    //         $filestmp = $_FILES["file"]["tmp_name"];
+    //         $fileserror = $_FILES["file"]["error"];
+    //         $extension = pathinfo($filename, PATHINFO_EXTENSION);
+
+    //         $sizeUpload = 3 * 1024 * 1024;
+    //         if ($filesize > $sizeUpload) {
+    //             $message = "Votre fichier est trop lourd, la taille maximale autorisée est de 1Mo";
+    //         }
+    //         else if (in_array($filetype, $allowed)) {
+
+    //                 move_uploaded_file($filestmp, $path . uniqid() . '.' .  $extension);
+    //                 $message = "Votre fichier a été téléchargé avec succès.";
+
+    //         } else {
+    //             $message = "Votre fichier n\'a pas été téléchargé";
+    //         }
+    //         } else {
+    //             $message = 'Error: ' . $_FILES['file']['error'];
+    //         }
+    // } else {
+    //     $message = 'Le format de fichier n'est pas conforme';
+    // }
 }
 
 ?>
