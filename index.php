@@ -24,13 +24,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $noUpload = true;
                 $message = 'Votre fichier est trop lourd, la taille maximale est de 1Mo';
             } else if (in_array($filetype, $allowed) && !$noUpload) {
-
-                if (file_exists('assets/img/' . $_FILES['file']['name'])) {
-                    $message = $_FILES['file']['name'] . ' existe déjà.';
-                } else {
-                    move_uploaded_file($_FILES['file']['tmp_name'], 'assets/img/' . uniqid() . '.' . $ext);
-                    $message = 'Votre fichier a été téléchargé avec succès.';
-                }
+                move_uploaded_file($_FILES['file']['tmp_name'], 'assets/img/' . uniqid() . '.' . $ext);
+                $message = 'Votre fichier a été téléchargé avec succès.';
             } else {
                 $message = 'Votre fichier n\'a pas été téléchargé';
             }
