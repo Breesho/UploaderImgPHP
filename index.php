@@ -1,38 +1,42 @@
 <?php
+
 $message = ' ';
+
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $noUpload = false;
+    $allowed = array('jpg' => 'image/jpg', 'jpeg' => 'image/jpeg', 'gif' => 'image/gif', 'png' => 'image/png');
+    $fileInfo = finfo_open(FILEINFO_MIME_TYPE);
+    $detected_type = finfo_file($fileInfo, $_FILES['file']['tmp_name']);
+    if (!in_array($detected_type, $allowed)) {
+        $message = 'Réessaye encore';
+    } else {
+        if (isset($_FILES['file']) && $_FILES['file']['error'] == 0) {
 
-    if (isset($_FILES['file']) && $_FILES['file']['error'] == 0) {
-        $allowed = array('jpg' => 'image/jpg', 'jpeg' => 'image/jpeg', 'gif' => 'image/gif', 'png' => 'image/png');
-        $filename = $_FILES['file']['name'];
-        $filetype = $_FILES['file']['type'];
-        $filesize = $_FILES['file']['size'];
+            $filename = $_FILES['file']['name'];
+            $filetype = $_FILES['file']['type'];
+            $filesize = $_FILES['file']['size'];
 
 
-        $ext = pathinfo($filename, PATHINFO_EXTENSION);
-        if (!array_key_exists($ext, $allowed)) {
-            $message = 'Le format du fichier n\'est pas conforme';
-        } else {
+            $ext = pathinfo($filename, PATHINFO_EXTENSION);
             $maxsize = 1024 * 1024;
             if ($filesize > $maxsize) {
                 $noUpload = true;
                 $message = 'Votre fichier est trop lourd, la taille maximale est de 1Mo';
             } else if (in_array($filetype, $allowed) && !$noUpload) {
-                // Vérifie si le fichier existe avant de le télécharger.
+
                 if (file_exists('assets/img/' . $_FILES['file']['name'])) {
                     $message = $_FILES['file']['name'] . ' existe déjà.';
                 } else {
-                    move_uploaded_file($_FILES['file']['tmp_name'], 'assets/img/' . uniqid() . $_FILES['file']['name']);
+                    move_uploaded_file($_FILES['file']['tmp_name'], 'assets/img/' . uniqid() . '.' . $ext);
                     $message = 'Votre fichier a été téléchargé avec succès.';
                 }
             } else {
                 $message = 'Votre fichier n\'a pas été téléchargé';
             }
+        } else {
+            $message = 'Error: ' . $_FILES['file']['error'];
         }
-    } else {
-        $message = 'Error: ' . $_FILES['file']['error'];
     }
 }
 
@@ -61,14 +65,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
     <div class="container-fluid">
-        <div class="col-4 col-sm-12">
+        <div class="col-4 col-sm-12 text-center">
             <div>
-                <img class="preview">
+                <img class="preview mx-auto">
             </div>
-            <form action="index.php" method="post" enctype="multipart/form-data">
-                <input type="file" name="file" id="file" data-preview=".preview">
-                <input type="submit" value="Upload">
-            </form>
+
+            <div>
+                <form action="index.php" method="post" enctype="multipart/form-data">
+                    <input type="file" name="file" id="file" data-preview=".preview" class="btn btn-outline-dark">
+                    <input type="submit" value="Upload" class="btn btn-outline-dark">
+                </form>
+            </div>
 
             <div>
                 <p><?= $message ?></p>
