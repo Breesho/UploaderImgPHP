@@ -72,7 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     //             $message = 'Error: ' . $_FILES['file']['error'];
     //         }
     // } else {
-    //     $message = 'Le format de fichier n'est pas conforme';
+    //     $message = 'Le format de fichier n\'est pas conforme';
     // }
 }
 
