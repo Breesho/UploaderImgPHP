@@ -25,7 +25,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     //             $filetype = $_FILES['file']['type'];
     //             $filesize = $_FILES['file']['size'];
 
-
     //             $ext = pathinfo($filename, PATHINFO_EXTENSION);
     //             $maxsize = 1024 * 1024;
     //             if ($filesize > $maxsize) {
@@ -54,28 +53,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($_FILES['file']['error'] == 4) {
         $message = 'Veuillez uploader une image';
     } else {
-        $filetmpname = $_FILES["file"]["tmp_name"];
+        $filetmpname = $_FILES['file']['tmp_name'];
         $filemime = mime_content_type($filetmpname);
         if (in_array($filemime, $allowed)) {
 
             if (isset($_FILES["file"]) && $_FILES['file']['error'] == 0) {
 
-                $filename =  $_FILES["file"]["name"];
-                $filetype = $_FILES["file"]["type"];
-                $filesize = $_FILES["file"]["size"];
-                $filestmp = $_FILES["file"]["tmp_name"];
-                $fileserror = $_FILES["file"]["error"];
+                $filename =  $_FILES['file']['name'];
+                $filetype = $_FILES['file']['type'];
+                $filesize = $_FILES['file']['size'];
+                $filestmp = $_FILES['file']['tmp_name'];
+                $fileserror = $_FILES['file']['error'];
                 $extension = pathinfo($filename, PATHINFO_EXTENSION);
 
                 $sizeUpload = 3 * 1024 * 1024;
                 if ($filesize > $sizeUpload) {
-                    $message = "Votre fichier est trop lourd, la taille maximale autorisée est de 1Mo";
+                    $message = 'Votre fichier est trop lourd, la taille maximale autorisée est de 1Mo';
                 } else if (in_array($filetype, $allowed)) {
-
                     move_uploaded_file($filestmp, $path . uniqid() . '.' .  $extension);
-                    $message = "Votre fichier a été téléchargé avec succès.";
+                    $message = 'Votre fichier a été téléchargé avec succès.';
                 } else {
-                    $message = "Votre fichier n\'a pas été téléchargé";
+                    $message = 'Votre fichier n\'a pas été téléchargé';
                 }
             } else {
                 $message = 'Error: ' . $_FILES['file']['error'];
