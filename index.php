@@ -11,36 +11,36 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
 
-    // if ($_FILES['file']['error'] == 4) {
-    //     $message = 'Aucun fichier sélectionné, veuillez en sélectionner un.';
-    // } else {
-    //     $fileInfo = finfo_open(FILEINFO_MIME_TYPE);
-    //     $detected_type = finfo_file($fileInfo, $_FILES['file']['tmp_name']);
-    //     if (!in_array($detected_type, $allowed)) {
-    //         $message = 'Votre format de fichier n\'est pas conforme. Fichier autorisé : JPG/JPEG/GIF/PNG';
-    //     } else {
-    //         if (isset($_FILES['file']) && $_FILES['file']['error'] == 0) {
+    if ($_FILES['file']['error'] == 4) {
+        $message = 'Aucun fichier sélectionné, veuillez en sélectionner un.';
+    } else {
+        $fileInfo = finfo_open(FILEINFO_MIME_TYPE);
+        $detected_type = finfo_file($fileInfo, $_FILES['file']['tmp_name']);
+        if (!in_array($detected_type, $allowed)) {
+            $message = 'Votre format de fichier n\'est pas conforme. Fichier autorisé : JPG/JPEG/GIF/PNG';
+        } else {
+            if (isset($_FILES['file']) && $_FILES['file']['error'] == 0) {
 
-    //             $filename = $_FILES['file']['name'];
-    //             $filetype = $_FILES['file']['type'];
-    //             $filesize = $_FILES['file']['size'];
+                $filename = $_FILES['file']['name'];
+                $filetype = $_FILES['file']['type'];
+                $filesize = $_FILES['file']['size'];
 
-    //             $ext = pathinfo($filename, PATHINFO_EXTENSION);
-    //             $maxsize = 1024 * 1024;
-    //             if ($filesize > $maxsize) {
-    //                 $noUpload = true;
-    //                 $message = 'Votre fichier est trop lourd, la taille maximale autorisée est de 1Mo.';
-    //             } else if (in_array($filetype, $allowed) && !$noUpload) {
-    //                 move_uploaded_file($_FILES['file']['tmp_name'], 'assets/img/' . uniqid() . '.' . $ext);
-    //                 $message = 'Votre fichier a été téléchargé avec succès.';
-    //             } else {
-    //                 $message = 'Votre fichier n\'a pas été téléchargé. Veuillez réessayer.';
-    //             }
-    //         } else {
-    //             $message = 'Error: ' . $_FILES['file']['error'];
-    //         }
-    //     }
-    // }
+                $ext = pathinfo($filename, PATHINFO_EXTENSION);
+                $maxsize = 1024 * 1024;
+                if ($filesize > $maxsize) {
+                    $noUpload = true;
+                    $message = 'La taille de l\'image est supérieure à 1 Mo (' . round($filesize  / 1000000) .  ' Mo) , veuillez réessayer';
+                } else if (in_array($filetype, $allowed) && !$noUpload) {
+                    move_uploaded_file($_FILES['file']['tmp_name'], 'assets/img/' . uniqid() . '.' . $ext);
+                    $message = 'Votre fichier a été téléchargé avec succès.';
+                } else {
+                    $message = 'Votre fichier n\'a pas été téléchargé. Veuillez réessayer.';
+                }
+            } else {
+                $message = 'Error: ' . $_FILES['file']['error'];
+            }
+        }
+    }
 
 
 
@@ -50,38 +50,38 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
 
-    if ($_FILES['file']['error'] == 4) {
-        $message = 'Aucun fichier sélectionné, veuillez en sélectionner un.';
-    } else {
-        $filetmpname = $_FILES['file']['tmp_name'];
-        $filemime = mime_content_type($filetmpname);
-        if (in_array($filemime, $allowed)) {
+    // if ($_FILES['file']['error'] == 4) {
+    //     $message = 'Aucun fichier sélectionné, veuillez en sélectionner un.';
+    // } else {
+    //     $filetmpname = $_FILES['file']['tmp_name'];
+    //     $filemime = mime_content_type($filetmpname);
+    //     if (in_array($filemime, $allowed)) {
 
-            if (isset($_FILES["file"]) && $_FILES['file']['error'] == 0) {
+    //         if (isset($_FILES["file"]) && $_FILES['file']['error'] == 0) {
 
-                $filename =  $_FILES['file']['name'];
-                $filetype = $_FILES['file']['type'];
-                $filesize = $_FILES['file']['size'];
-                $filestmp = $_FILES['file']['tmp_name'];
-                $fileserror = $_FILES['file']['error'];
-                $extension = pathinfo($filename, PATHINFO_EXTENSION);
+    //             $filename =  $_FILES['file']['name'];
+    //             $filetype = $_FILES['file']['type'];
+    //             $filesize = $_FILES['file']['size'];
+    //             $filestmp = $_FILES['file']['tmp_name'];
+    //             $fileserror = $_FILES['file']['error'];
+    //             $extension = pathinfo($filename, PATHINFO_EXTENSION);
 
-                $sizeUpload = 3 * 1024 * 1024;
-                if ($filesize > $sizeUpload) {
-                    $message = 'Votre fichier est trop lourd, la taille maximale autorisée est de 1Mo.';
-                } else if (in_array($filetype, $allowed)) {
-                    move_uploaded_file($filestmp, 'assets/img/' . uniqid() . '.' .  $extension);
-                    $message = 'Votre fichier a été téléchargé avec succès.';
-                } else {
-                    $message = 'Votre fichier n\'a pas été téléchargé. Veuillez réessayer.';
-                }
-            } else {
-                $message = 'Error: ' . $_FILES['file']['error'];
-            }
-        } else {
-            $message = 'Votre format de fichier n\'est pas conforme. Fichier autorisé : JPG/JPEG/GIF/PNG';
-        }
-    }
+    //             $sizeUpload = 3 * 1024 * 1024;
+    //             if ($filesize > $sizeUpload) {
+    //                 $message = 'La taille de l\'image est supérieure à 1 Mo (' . round($filesize  / 1000000) .  ' Mo) , veuillez réessayer';
+    //             } else if (in_array($filetype, $allowed)) {
+    //                 move_uploaded_file($filestmp, 'assets/img/' . uniqid() . '.' .  $extension);
+    //                 $message = 'Votre fichier a été téléchargé avec succès.';
+    //             } else {
+    //                 $message = 'Votre fichier n\'a pas été téléchargé. Veuillez réessayer.';
+    //             }
+    //         } else {
+    //             $message = 'Error: ' . $_FILES['file']['error'];
+    //         }
+    //     } else {
+    //         $message = 'Votre format de fichier n\'est pas conforme. Fichier autorisé : JPG/JPEG/GIF/PNG';
+    //     }
+    // }
 }
 
 ?>
