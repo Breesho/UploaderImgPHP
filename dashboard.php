@@ -15,7 +15,7 @@ require_once 'my-config.php';
 <body>
 
     <div class="jumbotron jumbotron-fluid text-center">
-        <div class="container">
+        <div class="container-fluid">
             <h1 class="display-4">Espace Membre - AllPix</h1>
         </div>
     </div>
@@ -44,23 +44,30 @@ require_once 'my-config.php';
                     </div>
                 </div>
                 <div class="text-center">
-                    <button class="btn btn-outline-dark" href="gallery.php">Galerie</button>
+                    <a class="btn btn-outline-dark" href="gallery.php">Galerie</a>
+                    <a class="btn btn-outline-dark" href="dashboard.php">Déconnexion</a>
                 </div>
+                
 
             </div>
         <?php } else if ($_SESSION['username'] == 'superuser') { ?>
             <div class="container-fluid">
                 <div class="col-4 col-sm-12 text-center">
                     <div>
-                        <p>Bonjour <?= $userArray['usernameUser'] ?></p>
-                    </div>
-                    <div>
-                        <?= include 'gallery.php' ?>
+                        <p>Vous n'avez pas les droits requis pour accéder à cette page</p>
                     </div>
                 </div>
             </div>
-    <?php }
-    } ?>
+        <?php }
+    } else { ?>
+        <div class="container-fluid">
+            <div class="col-4 col-sm-12 text-center">
+                <div>
+                    <p>Pour accéder à cette page, vous devez obligatoirement vous connecter</p>
+                </div>
+            </div>
+        </div>
+    <?php } ?>
 
 
 

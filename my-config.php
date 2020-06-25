@@ -104,7 +104,7 @@ if (isset($_POST['username'])) {
             header('Location: dashboard.php');
     } else if ($_POST['username'] == $userArray['usernameUser']) {
             $_SESSION['username'] = 'superuser';
-            header('Location: dashboard.php');
+            header('Location: gallery.php');
     } else {
         $error['username'] = 'Le login n\'est pas conforme';
     }

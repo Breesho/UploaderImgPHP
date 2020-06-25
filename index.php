@@ -14,24 +14,24 @@ require_once 'my-config.php';
 
 <body>
     <div class="jumbotron jumbotron-fluid text-center">
-        <div class="container">
+        <div class="container-fluid">
             <h1 class="display-4">Connexion - AllPix</h1>
         </div>
     </div>
 
-    <div class="container">
+    <div class="container-fluid">
         <form action="index.php" method="post">
             <div class="form-group">
                 <label for="username">Nom d'Utilisateur :</label>
                 <input type="text" class="form-control" name="username" id="username" value="<?= isset($_POST['username']) ? $_POST['username'] : '' ?>">
-                <span class="highlightError"><?= (isset($error['username'])) ? $error['username'] : '' ?></span>
+                
             </div>
             <div class="form-group">
                 <label for="password">Mot de Passe :</label>
                 <input type="password" class="form-control" name="password" id="password">
-                <span class="highlightError"><?= (isset($error['password'])) ? $error['password'] : '' ?></span>
             </div>
-            <button type="submit" name="submit" class="btn btn-primary">Se Connecter</button>
+            <span class="highlightError"><?= (isset($error['username'])) ? $error['username'] : '' ?></span>
+            <button type="submit" name="submit" class="btn btn-outline-dark">Se Connecter</button>
         </form>
     </div>
 
