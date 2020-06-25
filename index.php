@@ -1,130 +1,39 @@
 <?php
-
-$message = ' ';
-
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $noUpload = false;
-    $allowed = array('jpg' => 'image/jpg', 'jpeg' => 'image/jpeg', 'gif' => 'image/gif', 'png' => 'image/png');
-
-    // ---------- VERSION finfo
-
-    if ($_FILES['file']['error'] == 4) {
-        $message = 'Aucun fichier sélectionné, veuillez en sélectionner un.';
-    } else {
-        $fileInfo = finfo_open(FILEINFO_MIME_TYPE);
-        $detected_type = finfo_file($fileInfo, $_FILES['file']['tmp_name']);
-        if (!in_array($detected_type, $allowed)) {
-            $message = 'Votre format de fichier n\'est pas conforme. Fichier autorisé : JPG/JPEG/GIF/PNG';
-        } else {
-            if (isset($_FILES['file']) && $_FILES['file']['error'] == 0) {
-
-                $filename = $_FILES['file']['name'];
-                $filetype = $_FILES['file']['type'];
-                $filesize = $_FILES['file']['size'];
-
-                $ext = pathinfo($filename, PATHINFO_EXTENSION);
-                $maxsize = 1024 * 1024;
-                if ($filesize > $maxsize) {
-                    $noUpload = true;
-                    $message = 'La taille de l\'image est supérieure à 1 Mo (' . round($filesize  / 1000000) .  ' Mo) , veuillez réessayer';
-                } else if (in_array($filetype, $allowed) && !$noUpload) {
-                    move_uploaded_file($_FILES['file']['tmp_name'], 'assets/img/' . uniqid() . '.' . $ext);
-                    $message = 'Votre fichier a été téléchargé avec succès.';
-                } else {
-                    $message = 'Votre fichier n\'a pas été téléchargé. Veuillez réessayer.';
-                }
-            } else {
-                $message = 'Error: ' . $_FILES['file']['error'];
-            }
-        }
-    }
-
-
-
-
-    // ---------- VERSION mime_content_type
-
-    // if ($_FILES['file']['error'] == 4) {
-    //     $message = 'Aucun fichier sélectionné, veuillez en sélectionner un.';
-    // } else {
-    //     $filetmpname = $_FILES['file']['tmp_name'];
-    //     $filemime = mime_content_type($filetmpname);
-    //     if (in_array($filemime, $allowed)) {
-
-    //         if (isset($_FILES["file"]) && $_FILES['file']['error'] == 0) {
-
-    //             $filename =  $_FILES['file']['name'];
-    //             $filetype = $_FILES['file']['type'];
-    //             $filesize = $_FILES['file']['size'];
-    //             $filestmp = $_FILES['file']['tmp_name'];
-    //             $fileserror = $_FILES['file']['error'];
-    //             $extension = pathinfo($filename, PATHINFO_EXTENSION);
-
-    //             $sizeUpload = 3 * 1024 * 1024;
-    //             if ($filesize > $sizeUpload) {
-    //                 $message = 'La taille de l\'image est supérieure à 1 Mo (' . round($filesize  / 1000000) .  ' Mo) , veuillez réessayer';
-    //             } else if (in_array($filetype, $allowed)) {
-    //                 move_uploaded_file($filestmp, 'assets/img/' . uniqid() . '.' .  $extension);
-    //                 $message = 'Votre fichier a été téléchargé avec succès.';
-    //             } else {
-    //                 $message = 'Votre fichier n\'a pas été téléchargé. Veuillez réessayer.';
-    //             }
-    //         } else {
-    //             $message = 'Error: ' . $_FILES['file']['error'];
-    //         }
-    //     } else {
-    //         $message = 'Votre format de fichier n\'est pas conforme. Fichier autorisé : JPG/JPEG/GIF/PNG';
-    //     }
-    // }
-}
-
+require_once 'my-config.php';
 ?>
-
-
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="assets/css/style.css">
-    <title>UploaderImg</title>
+    <title>Espace Membre</title>
 </head>
 
 <body>
-
-    <div class="jumbotron jumbotron-fluid">
+    <div class="jumbotron jumbotron-fluid text-center">
         <div class="container">
-            <h1 class="display-4">TP - PHP</h1>
+            <h1 class="display-4">Connexion - AllPix</h1>
         </div>
     </div>
 
-
-
-    <div class="container-fluid">
-        <div class="col-4 col-sm-12 text-center">
-            <div>
-                <img class="preview mx-auto">
+    <div class="container">
+        <form action="index.php" method="post">
+            <div class="form-group">
+                <label for="username">Nom d'Utilisateur :</label>
+                <input type="text" class="form-control" name="username" id="username" value="<?= isset($_POST['username']) ? $_POST['username'] : '' ?>">
+                <span class="highlightError"><?= (isset($error['username'])) ? $error['username'] : '' ?></span>
             </div>
-
-            <div>
-                <form action="index.php" method="post" enctype="multipart/form-data">
-                    <input type="file" name="file" id="file" data-preview=".preview" class="btn btn-outline-dark">
-                    <input type="submit" value="Upload" class="btn btn-outline-dark">
-                </form>
+            <div class="form-group">
+                <label for="password">Mot de Passe :</label>
+                <input type="password" class="form-control" name="password" id="password">
+                <span class="highlightError"><?= (isset($error['password'])) ? $error['password'] : '' ?></span>
             </div>
-
-            <div>
-                <p><?= $message ?></p>
-            </div>
-        </div>
-        <div class="col-8 col-sm-12">
-
-        </div>
+            <button type="submit" name="submit" class="btn btn-primary">Se Connecter</button>
+        </form>
     </div>
-
 
 
 
