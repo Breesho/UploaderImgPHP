@@ -26,7 +26,8 @@ require_once 'my-config.php';
             <div class="container-fluid">
                 <div class="col-4 col-sm-12 text-center">
                     <div>
-                        <p><?= $adminArray['usernameAdmin'] ?></p>
+                        <p>Bonjour <?= $adminArray['usernameAdmin'] ?></p>
+                        <p>Quota : <?= TailleDossier('assets/img/') ?> / 50 Mo</p>
                     </div>
                     <div>
                         <img class="preview mx-auto">
@@ -42,12 +43,16 @@ require_once 'my-config.php';
                         <p><?= $message ?></p>
                     </div>
                 </div>
+                <div class="text-center">
+                    <button class="btn btn-outline-dark" href="gallery.php">Galerie</button>
+                </div>
+
             </div>
         <?php } else if ($_SESSION['username'] == 'superuser') { ?>
             <div class="container-fluid">
                 <div class="col-4 col-sm-12 text-center">
                     <div>
-                        <p><?= $userArray['usernameUser'] ?></p>
+                        <p>Bonjour <?= $userArray['usernameUser'] ?></p>
                     </div>
                     <div>
                         <?= include 'gallery.php' ?>
