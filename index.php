@@ -9,8 +9,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // ---------- VERSION finfo
 
-
-
     if ($_FILES['file']['error'] == 4) {
         $message = 'Aucun fichier sélectionné, veuillez en sélectionner un.';
     } else {
@@ -46,9 +44,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
     // ---------- VERSION mime_content_type
-
-
-
 
     // if ($_FILES['file']['error'] == 4) {
     //     $message = 'Aucun fichier sélectionné, veuillez en sélectionner un.';
