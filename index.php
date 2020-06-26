@@ -9,7 +9,7 @@ require_once 'my-config.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="assets/css/style.css">
-    <title>Espace Membre</title>
+    <title>Connexion</title>
 </head>
 
 <body>
@@ -30,7 +30,7 @@ require_once 'my-config.php';
                 <label for="password">Mot de Passe :</label>
                 <input type="password" class="form-control" name="password" id="password">
             </div>
-            <span class="highlightError"><?= (isset($error['username'])) ? $error['username'] : '' ?></span>
+            <span class="highlightError"><?= (isset($error['password'])) ? $error['password'] : '' ?></span>
             <button type="submit" name="submit" class="btn btn-outline-dark">Se Connecter</button>
         </form>
     </div>

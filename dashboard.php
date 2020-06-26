@@ -9,7 +9,7 @@ require_once 'my-config.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="assets/css/style.css">
-    <title>UploaderImg</title>
+    <title>Dashboard</title>
 </head>
 
 <body>
@@ -27,7 +27,7 @@ require_once 'my-config.php';
                 <div class="col-4 col-sm-12 text-center">
                     <div>
                         <p>Bonjour <?= $adminArray['usernameAdmin'] ?></p>
-                        <p>Quota : <?= TailleDossier('assets/img/') ?> / 50 Mo</p>
+                        <p>Quota : <?= round(TailleDossier('assets/img/') / 1000000) ?> Mo / 50 Mo</p>
                     </div>
                     <div>
                         <img class="preview mx-auto">
@@ -45,7 +45,7 @@ require_once 'my-config.php';
                 </div>
                 <div class="text-center">
                     <a class="btn btn-outline-dark" href="gallery.php">Galerie</a>
-                    <a class="btn btn-outline-dark" href="dashboard.php">Déconnexion</a>
+                    <a class="btn btn-outline-dark" href="index.php">Déconnexion</a>
                 </div>
                 
 
@@ -56,6 +56,7 @@ require_once 'my-config.php';
                     <div>
                         <p>Vous n'avez pas les droits requis pour accéder à cette page</p>
                     </div>
+                    <a class="btn btn-outline-dark" href="gallery.php">Retour vers la galerie</a>
                 </div>
             </div>
         <?php }
@@ -65,6 +66,7 @@ require_once 'my-config.php';
                 <div>
                     <p>Pour accéder à cette page, vous devez obligatoirement vous connecter</p>
                 </div>
+                <a class="btn btn-outline-dark" href="index.php">Retour à l'accueil</a>
             </div>
         </div>
     <?php } ?>

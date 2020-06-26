@@ -9,7 +9,7 @@ require_once 'my-config.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="assets/css/style.css">
-    <title>Document</title>
+    <title>Galerie</title>
 </head>
 
 <body>
@@ -44,7 +44,7 @@ require_once 'my-config.php';
                     <div>
                         <!-- Galerie -->
                     </div>
-                    <a class="btn btn-outline-dark" href="dashboard.php">Déconnexion</a>
+                    <a class="btn btn-outline-dark" href="index.php">Déconnexion</a>
                 </div>
             </div>
         <?php }
@@ -54,6 +54,7 @@ require_once 'my-config.php';
                 <div>
                     <p>Pour accéder à cette page, vous devez obligatoirement vous connecter</p>
                 </div>
+                <a class="btn btn-outline-dark" href="index.php">Retour vers l'accueil</a>
             </div>
         </div>
     <?php } ?>
