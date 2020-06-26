@@ -1,5 +1,5 @@
 <?php
-require_once 'my-config.php';
+require_once 'assets/php/my-config.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,19 +19,21 @@ require_once 'my-config.php';
         </div>
     </div>
 
-    <div class="container-fluid">
+    <div class="container-fluid text-center">
         <form action="index.php" method="post">
             <div class="form-group">
                 <label for="username">Nom d'Utilisateur :</label>
                 <input type="text" class="form-control" name="username" id="username" value="<?= isset($_POST['username']) ? $_POST['username'] : '' ?>">
-                
+
             </div>
             <div class="form-group">
                 <label for="password">Mot de Passe :</label>
                 <input type="password" class="form-control" name="password" id="password">
             </div>
-            <span class="highlightError"><?= (isset($error['password'])) ? $error['password'] : '' ?></span>
-            <button type="submit" name="submit" class="btn btn-outline-dark">Se Connecter</button>
+            <div class="row">
+                <span class="highlightError"><?= (isset($error['password'])) ? $error['password'] : '' ?></span>
+            </div>
+                <button type="submit" name="submit" class="btn btn-outline-dark">Se Connecter</button>
         </form>
     </div>
 

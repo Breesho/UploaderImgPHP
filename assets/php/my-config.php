@@ -1,6 +1,7 @@
 <?php
 session_start();
 
+
 $tailleDossier = 50000000;
 $maxsize = 6 * 1024 * 1024;
 
@@ -91,48 +92,26 @@ if (isset($_POST['submitUpload'])) {
 /* Tableaux pour l'admin et l'user */
 $adminArray = [
     'usernameAdmin' => 'superadmin',
-    'passwordAdmin' => '$2y$10$06bQFmoWx6Q0chQvc0vmROHFMPfA4sKTt/fuiLknppWljdsoqg3nW'
+    'passwordAdmin' => '$2y$10$hItIPIRio/awMgYSZULLw.wJlppRQyN4aRXUGIkEjkt7li0bmVbkG'
 ];
 
 $userArray = [
     'usernameUser' => 'superuser',
-    'passwordUser' => '$2y$10$hpkUbDCzGH5SaGNngPDX5exRruL4qZzInawigf2RV.vY2xSyLyIA2'
+    'passwordUser' => '$2y$10$O0oStb6BmJh8H0EDJcMiq.Ctb0d01PqIO6xufPW8RM9aF3TV99GAe'
 ];
 
 /* Vérifications des inputs */
 $error = [];
-$success = [];
 
-if (isset($_POST['username'])) {
-    if ($_POST['username'] == $adminArray['usernameAdmin'] && $_POST['password'] == $adminArray['passwordAdmin']) {
+if (!empty($_POST['username']) && !empty($_POST['password'])) {
+    if ($_POST['username'] == $adminArray['usernameAdmin'] && password_verify($_POST['password'], $adminArray['passwordAdmin'])) {
         $_SESSION['username'] = 'superadmin';
         header('Location: dashboard.php');
-    } else if ($_POST['username'] == $userArray['usernameUser'] && $_POST['password'] == $userArray['passwordUser']) {
+    } else if ($_POST['username'] == $userArray['usernameUser'] && password_verify($_POST['password'], $userArray['passwordUser'])) {
         $_SESSION['username'] = 'superuser';
         header('Location: gallery.php');
     } else {
-        $error['username'] = 'Le login n\'est pas conforme';
-    }
-    if (empty($_POST['username']) || empty($_POST['password'])) {
-        $error['password'] = 'Veuillez remplir ce champs';
-    };
-};
-
-if (isset($_POST['password'])) {
-    $hashAdmin = '$2y$10$06bQFmoWx6Q0chQvc0vmROHFMPfA4sKTt/fuiLknppWljdsoqg3nW';
-
-    if (password_verify($_POST['password'], $hashAdmin)) {
-        $success['password'] = 'Le mot de passe est valide !';
-    } else {
-        $error['password'] = 'Le mot de passe est invalide.';
-    }
-
-    $hashUser = '$2y$10$hpkUbDCzGH5SaGNngPDX5exRruL4qZzInawigf2RV.vY2xSyLyIA2';
-
-    if (password_verify($_POST['password'], $hashUser)) {
-        $success['password'] = 'Le mot de passe est valide !';
-    } else {
-        $error['password'] = 'Le mot de passe est invalide.';
+        $error['password'] = 'Le login ou le mot de passe n\'est pas bon';
     }
 }
 
@@ -154,4 +133,17 @@ function TailleDossier($Rep)
     }
     closedir($Racine);
     return $Taille;
+}
+
+
+/* ---------- Affichage images Photoswipe ---------- */
+
+$dir = 'assets/img/';
+$scanDir = scandir($dir);
+
+
+/* ---------- Kill Session ---------- */
+
+if (isset($_POST['killSession'])) {
+    session_destroy();
 }

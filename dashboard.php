@@ -1,5 +1,6 @@
 <?php
-require_once 'my-config.php';
+require_once 'assets/php/my-config.php';
+require_once 'assets/php/disconnectController.php'
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -45,10 +46,10 @@ require_once 'my-config.php';
                 </div>
                 <div class="text-center">
                     <a class="btn btn-outline-dark" href="gallery.php">Galerie</a>
-                    <a class="btn btn-outline-dark" href="index.php">Déconnexion</a>
+                    <form method="post" action="deconnexion.php" id="form">
+                        <button class="btn btn-outline-dark" id="delete" name="killSession">Déconnexion</button>
+                    </form>
                 </div>
-                
-
             </div>
         <?php } else if ($_SESSION['username'] == 'superuser') { ?>
             <div class="container-fluid">
