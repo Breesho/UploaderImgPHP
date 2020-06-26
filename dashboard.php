@@ -1,6 +1,5 @@
 <?php
 require_once 'assets/php/my-config.php';
-require_once 'assets/php/disconnectController.php'
 ?>
 <!DOCTYPE html>
 <html lang="fr">
