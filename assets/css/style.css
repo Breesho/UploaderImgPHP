@@ -163,7 +163,7 @@ header h1 {
     cursor: pointer;
 }
 
-#accessgallery {
+.accessgallery {
     width: 100%;
     margin: 0 auto;
     display: block;

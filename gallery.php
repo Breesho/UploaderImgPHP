@@ -25,7 +25,7 @@ require_once 'assets/php/my-config.php';
 
                         <p>Bonjour <?= $adminArray['usernameAdmin'] ?></p>
 
-                        <a class="btn btn-outline-dark" href="dashboard.php">Dashboard</a>
+                        <a class="accessgallery" href="dashboard.php">Dashboard</a>
             </div>
         <?php } else if ($_SESSION['username'] == 'superuser') { ?>
 
@@ -39,7 +39,7 @@ require_once 'assets/php/my-config.php';
                 } else { ?>
 
         <p>Pour accéder à cette page, vous devez obligatoirement vous connecter</p>
-        <a class="" href="index.php">Retour vers l'accueil</a>
+        <a class="accessgallery" href="index.php">Retour vers l'accueil</a>
 
     <?php } ?>
     <div class="flex">

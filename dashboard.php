@@ -44,7 +44,7 @@ require_once 'assets/php/my-config.php';
                     </div>
 
                     <div>
-                        <a id="accessgallery" href="gallery.php">Galerie</a>
+                        <a class="accessgallery" href="gallery.php">Galerie</a>
                     </div>
 
                     <form method="post" action="deconnexion.php" id="form">
@@ -56,14 +56,14 @@ require_once 'assets/php/my-config.php';
 
     <p>Vous n'avez pas les droits requis pour accéder à cette page</p>
 
-    <a class="" href="gallery.php">Retour vers la galerie</a>
+    <a class="accessgallery" href="gallery.php">Retour vers la galerie</a>
 
 <?php }
             } else { ?>
 
 <p>Pour accéder à cette page, vous devez obligatoirement vous connecter</p>
 
-<a class="" href="index.php">Retour à l'accueil</a>
+<a class="accessgallery" href="index.php">Retour à l'accueil</a>
 
 <?php } ?>
 </div>
