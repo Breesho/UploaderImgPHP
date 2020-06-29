@@ -18,7 +18,6 @@ require_once 'assets/php/my-config.php';
     </header>
     <div class="container-registerform flex">
         <form method="POST" action="" class="register-form">
-
             <div class="container-input">
                 <input type="text" class="register-input" name="username" id="username" placeholder="Nom D'utilisateur" value="<?= isset($_POST['username']) ? $_POST['username'] : '' ?>">
             </div>
@@ -31,7 +30,6 @@ require_once 'assets/php/my-config.php';
             <div class="container-register-submit">
                 <button type="submit" name="submit" class="register-submit" class="">Connexion</button>
             </div>
-
         </form>
     </div>
 

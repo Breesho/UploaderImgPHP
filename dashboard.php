@@ -30,46 +30,33 @@ require_once 'assets/php/my-config.php';
                         <img id="imgpreview">
                     </div>
                     <div>
-                        <form action="dashboard.php" method="post" enctype="multipart/form-data">
-
+                        <form action="dashboard.php" method="post" enctype="multipart/form-data" id="uploadForm">
+                            <label for="fileToUpload" class="custom-file-upload">Choisissez votre fichier</label>
                             <input type="file" name="file" id="fileToUpload" data-preview="#preview" class="">
-
                             <input type="submit" id="submitUpload" name="submitUpload" value="Upload" class="">
-
                         </form>
                     </div>
-
                     <div>
                         <p><?= $message ?></p>
                     </div>
-
                     <div>
                         <a class="accessgallery" href="gallery.php">Galerie</a>
                     </div>
-
                     <form method="post" action="deconnexion.php" id="form">
                         <button class="" id="delete" name="killSession">Déconnexion</button>
                     </form>
         </div>
     </div>
 <?php } else if ($_SESSION['username'] == 'superuser') { ?>
-
     <p>Vous n'avez pas les droits requis pour accéder à cette page</p>
-
     <a class="accessgallery" href="gallery.php">Retour vers la galerie</a>
-
 <?php }
             } else { ?>
-
 <p>Pour accéder à cette page, vous devez obligatoirement vous connecter</p>
-
 <a class="accessgallery" href="index.php">Retour à l'accueil</a>
-
 <?php } ?>
 </div>
 </div>
-
-
 
 <script src="assets/js/script.js"></script>
 </body>

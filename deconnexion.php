@@ -23,10 +23,10 @@ require_once 'assets/php/my-config.php'
                 <p>Vous avez été déconnecté</p>
             </div>
             <div>
-                <a class="btn-redirection" href="index.php">Revenir à l'accueil</a></div>
+                <a class="btn-redirection" href="index.php">Revenir à l'accueil</a>
+            </div>
         </div>
     </div>
-
 
 </body>
 
