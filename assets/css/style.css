@@ -1,5 +1,4 @@
 #imgpreview {
-
     width: 200px;
     max-height: 200px;
     display: block;
@@ -13,15 +12,15 @@
 }
 
 .lb-nav a.lb-prev {
-    background: url('assets/images/prev.png') left 48% no-repeat;
+    background: url('../images/prev.png') left 48% no-repeat;
 }
 
 .lb-nav a.lb-next {
-    background: url('assets/images/next.png') right 48% no-repeat;
+    background: url('../images/next.png') right 48% no-repeat;
 }
 
 .lb-cancel {
-    background: url('assets/images/loading.png') no-repeat;
+    background: url('../images/loading.png') no-repeat;
 }
 
 body {
@@ -190,7 +189,6 @@ header h1 {
     width: calc(25% - 20px);
     margin: 10px;
     text-align: center;
-
 }
 
 .galleryuser {
