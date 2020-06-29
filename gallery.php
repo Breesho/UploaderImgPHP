@@ -37,7 +37,9 @@ require_once 'assets/php/my-config.php';
     <?php } ?>
     <div class="flex">
         <?php foreach ($scanDir as $value) { ?>
-            <div class="container-img"><a href="assets/galerie/<?= $value ?>" data-lightbox="gallery"><img src="assets/galerie/<?= $value ?>" class="galerie-img" alt=""></a></div>
+            <div class="container-img">
+                <a href="assets/galerie/<?= $value ?>" data-lightbox="gallery"><img src="assets/galerie/<?= $value ?>" class="galerie-img" alt=""></a>
+            </div>
         <?php } ?></div>
         </div>
     </div>
