@@ -25,6 +25,7 @@ require_once 'assets/php/my-config.php';
                     <div>
                         <p>Bonjour <?= $adminArray['usernameAdmin'] ?></p>
                         <p>Quota : <?= round(TailleDossier('assets/galerie/') / 1000000) ?> Mo / 50 Mo</p>
+                        <p>Il y a actuellement <?= count(glob('assets/galerie/*.*')) ?> image(s) dans la galerie</p>
                     </div>
                     <div>
                         <img id="imgpreview">
