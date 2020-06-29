@@ -33,11 +33,11 @@ if (isset($_POST['submitUpload'])) {
                 if ($filesize > $maxsize) {
                     $noUpload = true;
                     $message = 'La taille de l\'image est supérieure à 1 Mo (' . round($filesize  / 1000000) .  ' Mo) , veuillez réessayer';
-                } else if (TailleDossier('assets/img/') + $filesize > $tailleDossier) {
+                } else if (TailleDossier('assets/galerie/') + $filesize > $tailleDossier) {
                     $noUpload = true;
                     $message = 'La taille maximale du dossier a été atteinte';
                 } else if (in_array($filetype, $allowed) && !$noUpload) {
-                    move_uploaded_file($_FILES['file']['tmp_name'], 'assets/img/' . uniqid() . '.' . $ext);
+                    move_uploaded_file($_FILES['file']['tmp_name'], 'assets/galerie/' . uniqid() . '.' . $ext);
                     $message = 'Votre fichier a été téléchargé avec succès.';
                 } else {
                     $message = 'Votre fichier n\'a pas été téléchargé. Veuillez réessayer.';
@@ -73,7 +73,7 @@ if (isset($_POST['submitUpload'])) {
     //             if ($filesize > $sizeUpload) {
     //                 $message = 'La taille de l\'image est supérieure à 1 Mo (' . round($filesize  / 1000000) .  ' Mo) , veuillez réessayer';
     //             } else if (in_array($filetype, $allowed)) {
-    //                 move_uploaded_file($filestmp, 'assets/img/' . uniqid() . '.' .  $extension);
+    //                 move_uploaded_file($filestmp, 'assets/galerie/' . uniqid() . '.' .  $extension);
     //                 $message = 'Votre fichier a été téléchargé avec succès.';
     //             } else {
     //                 $message = 'Votre fichier n\'a pas été téléchargé. Veuillez réessayer.';
@@ -138,8 +138,8 @@ function TailleDossier($Rep)
 
 /* ---------- Affichage images Photoswipe ---------- */
 
-$dir = 'assets/img/';
-$scanDir = scandir($dir);
+$dir = 'assets/galerie/';
+$scanDir = array_diff(scandir($dir), array('..', '.'));
 
 
 /* ---------- Kill Session ---------- */

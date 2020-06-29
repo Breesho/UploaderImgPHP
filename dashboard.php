@@ -27,7 +27,7 @@ require_once 'assets/php/my-config.php';
                 <div class="col-4 col-sm-12 text-center">
                     <div>
                         <p>Bonjour <?= $adminArray['usernameAdmin'] ?></p>
-                        <p>Quota : <?= round(TailleDossier('assets/img/') / 1000000) ?> Mo / 50 Mo</p>
+                        <p>Quota : <?= round(TailleDossier('assets/galerie/') / 1000000) ?> Mo / 50 Mo</p>
                     </div>
                     <div>
                         <img class="preview mx-auto">

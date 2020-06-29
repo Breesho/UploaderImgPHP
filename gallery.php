@@ -8,6 +8,7 @@ require_once 'assets/php/my-config.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/css/lightbox.css">
     <link rel="stylesheet" href="assets/css/style.css">
     <title>Galerie</title>
 </head>
@@ -28,9 +29,6 @@ require_once 'assets/php/my-config.php';
                     <div>
                         <p>Bonjour <?= $adminArray['usernameAdmin'] ?></p>
                     </div>
-                    <div>
-                        <!-- Galerie -->
-                    </div>
                     <a class="btn btn-outline-dark" href="dashboard.php">Dashboard</a>
                 </div>
 
@@ -40,9 +38,6 @@ require_once 'assets/php/my-config.php';
                 <div class="col-4 col-sm-12 text-center">
                     <div>
                         <p>Bonjour <?= $userArray['usernameUser'] ?></p>
-                    </div>
-                    <div>
-                        <!-- Galerie -->
                     </div>
                     <form method="post" action="deconnexion.php" id="form">
                         <button class="btn btn-outline-dark" id="delete" name="killSession">Déconnexion</button>
@@ -60,6 +55,21 @@ require_once 'assets/php/my-config.php';
             </div>
         </div>
     <?php } ?>
+
+    <div>
+        <?php foreach ($scanDir as $value) { ?>
+            <a href="assets/galerie/<?= $value ?>" data-lightbox="gallery"><img src="assets/galerie/<?= $value ?>" width="250px" height="250px" alt=""></a>
+        <?php } ?>
+    </div>
+
+
+    <script src="assets/js/lightbox-plus-jquery.js"></script>
+    <script>
+        lightbox.option({
+            'resizeDuration': 200,
+            'wrapAround': true
+        })
+    </script>
 </body>
 
 </html>
