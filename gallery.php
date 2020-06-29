@@ -9,7 +9,7 @@ require_once 'assets/php/my-config.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets/css/lightbox.css">
     <link rel="stylesheet" href="assets/css/style.css">
-    <title>Gallerie - AllPix</title>
+    <title>Galerie - AllPix</title>
 </head>
 
 <body>
