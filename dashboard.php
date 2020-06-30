@@ -13,7 +13,9 @@ require_once 'assets/php/my-config.php';
 
 <body>
     <header class="flex">
-        <h1>Dashboard - AllPix</h1>
+        <div class="logo">
+            <figure></figure>
+        </div>
     </header>
 
 

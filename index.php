@@ -14,7 +14,9 @@ require_once 'assets/php/my-config.php';
 <body>
 
     <header class="flex">
-        <h1>Connexion - AllPix</h1>
+        <div class="logo">
+            <figure></figure>
+        </div>
     </header>
     <div class="container-registerform flex">
         <form method="POST" action="" class="register-form">

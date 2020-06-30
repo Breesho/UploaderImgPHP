@@ -43,13 +43,24 @@ h1 {
 
 header {
     width: 100%;
-    height: 10%;
+    height:10%;
     background-color: white;
 }
 
-header h1 {
-    color: #424874;
-    text-transform: uppercase;
+div.logo {
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+}
+
+div.logo figure {
+    background-image: url(../images/logov2.png);
+    width: 200px;
+    height: 60px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin: 0 auto;
 }
 
 .container-registerform {
@@ -242,15 +253,23 @@ input[type="file"] {
 
 }
 
+@media screen and (max-height: 460px) {
+    header {
+        height:auto;
+    }
+}
+
 @media screen and (max-width: 460px) {
 
     .container-img {
         width: calc(100% - 20px);
         margin: 10px;
     }
+
     .custom-file-upload {
         margin-bottom: 10px;
     }
+
     .galerie-img {
         width: 250px;
     }
@@ -262,9 +281,11 @@ input[type="file"] {
     header h1 {
         font-size: 25px;
     }
+
     #uploadForm {
         text-align: center;
     }
+
     .register-form {
         width: 90%;
     }

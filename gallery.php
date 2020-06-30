@@ -14,7 +14,9 @@ require_once 'assets/php/my-config.php';
 
 <body>
     <header class="flex">
-        <h1>Galerie - AllPix</h1>
+        <div class="logo">
+            <figure></figure>
+        </div>
     </header>
     <div class="container-gallery flex">
         <div class="galleryformwidth">
