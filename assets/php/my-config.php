@@ -2,8 +2,8 @@
 session_start();
 
 
-$tailleDossier = 50000000;
-$maxsize = 6 * 1024 * 1024;
+$tailleDossier = 50 * 1024 * 1024;
+$maxsize = 5 * 1024 * 1024;
 
 /* ---------- Vérifications pour l'upload d'image ---------- */
 $message = ' ';
@@ -32,7 +32,7 @@ if (isset($_POST['submitUpload'])) {
 
                 if ($filesize > $maxsize) {
                     $noUpload = true;
-                    $message = 'La taille de l\'image est supérieure à 1 Mo (' . round($filesize  / 1000000) .  ' Mo) , veuillez réessayer';
+                    $message = 'La taille de l\'image est supérieure à 5 Mo (' . round($filesize  / 1000000) .  ' Mo) , veuillez réessayer';
                 } else if (TailleDossier('assets/galerie/') + $filesize > $tailleDossier) {
                     $noUpload = true;
                     $message = 'La taille maximale du dossier a été atteinte';
@@ -71,7 +71,7 @@ if (isset($_POST['submitUpload'])) {
 
     //             $sizeUpload = 3 * 1024 * 1024;
     //             if ($filesize > $sizeUpload) {
-    //                 $message = 'La taille de l\'image est supérieure à 1 Mo (' . round($filesize  / 1000000) .  ' Mo) , veuillez réessayer';
+    //                 $message = 'La taille de l\'image est supérieure à 5 Mo (' . round($filesize  / 1000000) .  ' Mo) , veuillez réessayer';
     //             } else if (in_array($filetype, $allowed)) {
     //                 move_uploaded_file($filestmp, 'assets/galerie/' . uniqid() . '.' .  $extension);
     //                 $message = 'Votre fichier a été téléchargé avec succès.';
